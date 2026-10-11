@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credence AI — Credit Risk Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>credence<span class="brand-ai">.ai</span></span></a>
+    <div class="topbar-right"><span class="live-dot"></span><span>MODEL STATUS <b>READY</b></span><div class="avatar">CR</div></div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="spark">✦</span> CREDIT INTELLIGENCE PLATFORM</div>
+      <h1>See the risk.<br><span>Make smarter decisions.</span></h1>
+      <p class="hero-copy">An AI-assisted credit assessment workspace that turns customer financial patterns into a clear, explainable risk snapshot.</p>
+      <div class="hero-meta"><span><i class="mini-icon">⌁</i> Machine learning powered</span><span><i class="mini-icon">◈</i> Instant assessment</span><span><i class="mini-icon">↗</i> Decision support</span></div>
+    </section>
+
+    <div class="dashboard-grid">
+      <section class="panel form-panel">
+        <div class="panel-heading">
+          <div><div class="section-kicker">ASSESSMENT WORKSPACE</div><h2>Customer profile</h2><p>Enter the account details to generate a risk assessment.</p></div>
+          <div class="step-chip"><span>01</span> / PROFILE</div>
+        </div>
+        <form id="risk-form">
+          <div class="form-section-title"><span class="section-icon">◉</span><div><b>Personal & credit details</b><small>Basic customer and credit information</small></div></div>
+          <div class="fields-grid">
+            <label class="field"><span>Credit limit <em>₹ / account units</em></span><input type="number" name="LIMIT_BAL" min="0" value="50000" required><small>Assigned credit limit</small></label>
+            <label class="field"><span>Age <em>years</em></span><input type="number" name="AGE" min="18" max="100" value="30" required><small>Customer age</small></label>
+            <label class="field"><span>Education</span><select name="EDUCATION"><option value="1">Graduate school</option><option value="2" selected>University</option><option value="3">High school</option><option value="4">Other</option></select><small>Education category</small></label>
+            <label class="field"><span>Marital status</span><select name="MARRIAGE"><option value="1">Married</option><option value="2" selected>Single</option><option value="3">Other</option></select><small>Recorded category</small></label>
+            <input type="hidden" name="SEX" value="1">
+          </div>
+
+          <div class="form-section-title spaced"><span class="section-icon">⌁</span><div><b>Repayment behaviour</b><small>Payment status over recent months · 0 = on time</small></div></div>
+          <div class="fields-grid six">
+            <label class="field"><span>Month 1 <em>PAY_0</em></span><select name="PAY_0"><option value="0">On time</option><option value="1">1 month late</option><option value="2">2 months late</option><option value="-1">Paid duly</option><option value="-2">No consumption</option></select></label>
+            <label class="field"><span>Month 2 <em>PAY_2</em></span><select name="PAY_2"><option value="0">On time</option><option value="1">1 month late</option><option value="2">2 months late</option><option value="-1">Paid duly</option><option value="-2">No consumption</option></select></label>
+            <label class="field"><span>Month 3 <em>PAY_3</em></span><select name="PAY_3"><option value="0">On time</option><option value="1">1 month late</option><option value="2">2 months late</option><option value="-1">Paid duly</option><option value="-2">No consumption</option></select></label>
+            <label class="field"><span>Month 4 <em>PAY_4</em></span><select name="PAY_4"><option value="0">On time</option><option value="1">1 month late</option><option value="2">2 months late</option><option value="-1">Paid duly</option><option value="-2">No consumption</option></select></label>
+            <label class="field"><span>Month 5 <em>PAY_5</em></span><select name="PAY_5"><option value="0">On time</option><option value="1">1 month late</option><option value="2">2 months late</option><option value="-1">Paid duly</option><option value="-2">No consumption</option></select></label>
+            <label class="field"><span>Month 6 <em>PAY_6</em></span><select name="PAY_6"><option value="0">On time</option><option value="1">1 month late</option><option value="2">2 months late</option><option value="-1">Paid duly</option><option value="-2">No consumption</option></select></label>
+          </div>
+
+          <div class="form-section-title spaced"><span class="section-icon">▤</span><div><b>Billing & payments</b><small>Recent statement values · enter in dataset units</small></div></div>
+          <div class="fields-grid">
+            <label class="field"><span>Average bill amount</span><input type="number" name="AVG_BILL_INPUT" min="0" value="12000"><small>Used as a starting value for six months</small></label>
+            <label class="field"><span>Average payment amount</span><input type="number" name="AVG_PAY_INPUT" min="0" value="3000"><small>Used as a starting value for six months</small></label>
+          </div>
+          <div class="form-footer"><span class="privacy-note"><span>◇</span> Inputs processed by your local model</span><button type="submit" class="primary-button" id="submit-btn"><span>Generate assessment</span><span class="button-arrow">↗</span></button></div>
+        </form>
+      </section>
+
+      <aside class="right-column">
+        <section class="result-panel panel" id="result-panel">
+          <div class="result-top"><div class="section-kicker">ASSESSMENT OUTPUT</div><span class="result-status" id="result-status">AWAITING INPUT</span></div>
+          <div class="result-empty" id="result-empty"><div class="orb"><div class="orb-inner">✦</div><span class="orb-ring ring-a"></span><span class="orb-ring ring-b"></span></div><h3>Your insight starts here.</h3><p>Complete the customer profile and run an assessment to reveal the model's prediction.</p><div class="empty-steps"><div><span>1</span> Enter profile</div><div><span>2</span> Run model</div><div><span>3</span> Review result</div></div></div>
+          <div class="result-content hidden" id="result-content"><div class="risk-label">PREDICTED DEFAULT RISK</div><div class="risk-number"><strong id="risk-score">—</strong><span>%</span></div><div class="risk-meter"><div id="risk-meter-fill"></div></div><div class="risk-level" id="risk-level">—</div><div class="prediction-card"><span class="prediction-icon">✦</span><div><small>MODEL PREDICTION</small><b id="prediction-message">—</b></div></div><p class="result-disclaimer">This is a model-generated estimate, not a lending decision. Validate inputs and assess fairness before real-world use.</p></div>
+          <div class="error-message hidden" id="error-message"></div>
+        </section>
+        <section class="panel guide-panel"><div class="guide-head"><span class="guide-icon">✧</span><div><h3>How to read this</h3><p>A quick guide to the assessment</p></div></div><div class="guide-row"><span class="guide-dot low"></span><div><b>Low risk</b><small>Score below 30%</small></div></div><div class="guide-row"><span class="guide-dot medium"></span><div><b>Medium risk</b><small>Score from 30% to 59.9%</small></div></div><div class="guide-row"><span class="guide-dot high"></span><div><b>High risk</b><small>Score of 60% or higher</small></div></div><div class="guide-note">Risk bands are illustrative thresholds configured in this demo.</div></section>
+      </aside>
+    </div>
+    <footer><span>© 2026 CREDENCE AI</span><span>BUILT FOR RESPONSIBLE DECISION SUPPORT</span><span><span class="live-dot"></span> LOCAL MODEL SESSION</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
